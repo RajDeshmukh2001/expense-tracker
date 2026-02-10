@@ -21,3 +21,12 @@ export const createExpense = async (data) => {
 
     await repository.create(expenseData);
 }
+
+export const getExpenseById = async (id) => {
+    const expense = await repository.findById(id);
+    if (expense.length === 0) {
+        throw new HttpError(404, "EXPENSE_NOT_FOUND", `Expense with id '${id}' does not exist`);
+    }
+
+    return expense;
+}
