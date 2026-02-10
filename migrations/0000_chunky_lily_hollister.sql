@@ -12,10 +12,8 @@ CREATE TABLE `expenses` (
 	`amount` decimal(10,2) NOT NULL,
 	`payment_method` enum('CASH','DEBIT_CARD','UPI','CREDIT_CARD') NOT NULL,
 	`transaction_date` timestamp NOT NULL,
-	`category_id` int NOT NULL,
-	`user_id` int NOT NULL,
-	`created_at` timestamp DEFAULT (now()),
-	`updated_at` timestamp DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP,
+	`category_id` bigint unsigned NOT NULL,
+	`user_id` bigint unsigned NOT NULL,
 	CONSTRAINT `expenses_id` PRIMARY KEY(`id`)
 );
 --> statement-breakpoint
