@@ -21,6 +21,4 @@ export const expenses = mysqlTable("expenses", {
     transactionDate: timestamp("transaction_date").notNull(),
     categoryId: bigint("category_id", { mode: "number", unsigned: true }).notNull().references(() => categories.id),
     userId: bigint("user_id", { mode: "number", unsigned: true }).notNull().references(() => users.id),
-    createdAt: timestamp("created_at").defaultNow(),
-    updatedAt: timestamp("updated_at").defaultNow().onUpdateNow(),
 });
