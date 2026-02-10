@@ -6,3 +6,8 @@ export const users = mysqlTable("users", {
     email: varchar("email", { length: 150 }).notNull().unique(),
     createdAt: timestamp("created_at").defaultNow(),
 });
+
+export const categories = mysqlTable("categories", {
+    id: serial("id").primaryKey(),
+    category: varchar("category", { length: 50 }).notNull().unique()
+});
