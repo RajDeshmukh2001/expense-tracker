@@ -11,3 +11,16 @@ export const categories = mysqlTable("categories", {
     id: serial("id").primaryKey(),
     category: varchar("category", { length: 50 }).notNull().unique()
 });
+
+export const expenses = mysqlTable("expenses", {
+    id: serial("id").primaryKey(),
+    title: varchar("title", { length: 255 }).notNull(),
+    description: varchar("description", { length: 500 }).notNull(),
+    amount: decimal("amount", { precision: 10, scale: 2 }).notNull(),
+    paymentMethod: mysqlEnum("payment_method", ["CASH", "DEBIT_CARD", "UPI", "CREDIT_CARD"]).notNull(),
+    transactionDate: timestamp("transaction_date").notNull(),
+    categoryId: bigint("category_id", { mode: "number", unsigned: true }).notNull().references(() => categories.id),
+    userId: bigint("user_id", { mode: "number", unsigned: true }).notNull().references(() => users.id),
+    createdAt: timestamp("created_at").defaultNow(),
+    updatedAt: timestamp("updated_at").defaultNow().onUpdateNow(),
+});
