@@ -32,6 +32,9 @@ The system supports recording expenses, viewing and filtering them, updating and
 **4. Update Expense By ID**
 - It allows partial updates to an existing expense
 
+**5. Delete Expense By ID**
+- Allows users to remove an existing expense record
+
 ---
 
 ## Getting Started
@@ -205,4 +208,23 @@ PATCH /api/expenses/:id
 }
 ```
 
+Status: 200 OK
+
+**5. Delete Expense by ID API**
+#### Endpoint
+```
+DELETE /api/expenses/:id
+```
+
+#### Headers
+| Key       | Required | Description                    |
+|-----------|----------|--------------------------------|
+| user-id   | Yes      | The ID of the requesting user  |
+
+### Success Response
+```json
+{
+  "message": "Expense deleted successfully"
+}
+```
 Status: 200 OK

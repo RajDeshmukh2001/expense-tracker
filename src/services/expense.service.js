@@ -43,3 +43,12 @@ export const getExpenseById = async (expenseId, userId) => {
 
     return expense[0];
 }
+
+export const deleteExpense = async (expenseId, userId) => {
+    await validateUser(userId);
+    const expense = await repository.findById(expenseId, userId);
+    if (expense.length === 0) {
+        throw new HttpError(404, "EXPENSE_NOT_FOUND", `Expense with id '${expenseId}' does not exist`);
+    }
+    await repository.deleteById(expenseId, userId);
+}
