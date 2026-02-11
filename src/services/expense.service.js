@@ -15,21 +15,23 @@ export const validateUser = async (userId) => {
     }
 }
 
-export const createExpense = async (data) => {
-    const user = await db.select().from(users).where(eq(users.id, data.userId));
-    if (user.length === 0) {
-        throw new HttpError(404, "INVALID_USER_ID", `User with id ${data.userId} does not exists`);
+export const validateCategory = async (category) => {
+    const categoryExists = await findByCategory(category);
+    if (categoryExists.length === 0) {
+        throw new HttpError(404, "INVALID_CATEGORY", `Category '${category}' does not exist. Valid categories are: EMI, Food, Transport, Healthcare, Rent, Other`);
     }
 
-    const category = await findByCategory(data.category);
-    if (category.length === 0) {
-        throw new HttpError(404, "INVALID_CATEGORY", `Category '${data.category}' does not exist. Valid categories are: EMI, Food, Transport, Healthcare, Rent, Other`);
-    }
+    return categoryExists[0];
+}
+
+export const createExpense = async (data) => {
+    await validateUser(data.userId);
+    const category = await validateCategory(data.category);
 
     const { category: categoryName, ...rest } = data;
-    const expenseData = { ...rest, categoryId: category[0].id };
+    data = { ...rest, categoryId: category.id };
 
-    await repository.create(expenseData);
+    await repository.create(data);
 }
 
 export const getExpenseById = async (expenseId, userId) => {
@@ -39,5 +41,5 @@ export const getExpenseById = async (expenseId, userId) => {
         throw new HttpError(404, "EXPENSE_NOT_FOUND", `Expense with id '${expenseId}' does not exist`);
     }
 
-    return expense;
+    return expense[0];
 }
