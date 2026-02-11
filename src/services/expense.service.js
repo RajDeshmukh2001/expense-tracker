@@ -44,6 +44,18 @@ export const getExpenseById = async (expenseId, userId) => {
     return expense[0];
 }
 
+export const updateExpense = async (expenseId, userId, data) => {
+    await getExpenseById(expenseId, userId);
+
+    if (data.category) {
+        const category = await validateCategory(data.category);
+        const { category: categoryName, ...rest } = data;
+        data = { ...rest, categoryId: category.id };
+    }
+
+    await repository.update(expenseId, data);
+}
+
 export const deleteExpense = async (expenseId, userId) => {
     await validateUser(userId);
     const expense = await repository.findById(expenseId, userId);
