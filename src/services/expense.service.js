@@ -55,3 +55,8 @@ export const updateExpense = async (expenseId, userId, data) => {
 
     await repository.update(expenseId, data);
 }
+
+export const deleteExpense = async (expenseId, userId) => {
+    await getExpenseById(expenseId, userId);
+    await repository.deleteById(expenseId, userId);
+}
