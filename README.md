@@ -19,6 +19,15 @@ The system supports recording expenses, viewing and filtering them, updating and
 
 ---
 
+## Features
+
+**1. Add Expense**
+- Create a new expense entry
+- Validates request data using Zod
+- Persists expense data in the database
+
+---
+
 ## Getting Started
 
 ### Prerequisites
@@ -93,7 +102,7 @@ Database connected successfully
 
 ---
 
-### How to Verify Locally
+## How to Verify Locally
 **Verify database connection**
 - Server logs should confirm DB connection on startup
 - If DB is unreachable, the server will not start
@@ -109,3 +118,35 @@ SELECT * FROM categories;
 You should see:
 - One default user
 - Multiple predefined categories**
+
+---
+
+## API Endpoints
+
+**1. Add Expense API**
+
+Add a new expense 
+
+#### Endpoint
+```
+POST /api/expenses
+```
+#### Request Body
+```json
+{
+  "title": "Grocery Shopping",
+  "description": "Weekly groceries",
+  "amount": 1500.50,
+  "category": "FOOD",
+  "paymentMethod": "UPI",
+  "transactionDate": "2024-06-15",
+  "userId": 1
+}
+```
+#### Success Response
+```json
+{
+  "message": "Expense created successfully"
+}
+```
+Status: 201 Created
