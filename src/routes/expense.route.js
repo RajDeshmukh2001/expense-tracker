@@ -6,5 +6,6 @@ import * as controller from "../controllers/expense.controller.js";
 const router = Router();
 
 router.post("/", validate(createExpenseSchema), controller.createExpense);
+router.get("/:id", controller.getExpenseById);
 
 export default router;

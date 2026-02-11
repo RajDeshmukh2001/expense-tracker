@@ -26,6 +26,9 @@ The system supports recording expenses, viewing and filtering them, updating and
 - Validates request data using Zod
 - Persists expense data in the database
 
+**3. Get Expense by ID**
+- Retrieves the details of a specific expense using its unique identifier.
+
 ---
 
 ## Getting Started
@@ -149,4 +152,31 @@ POST /api/expenses
   "message": "Expense created successfully"
 }
 ```
-Status: 201 Created
+Status: 201 
+
+**3. Get Expense by ID API**
+#### Endpoint
+```
+GET /api/expenses/:id
+```
+
+#### Headers
+| Key       | Required | Description                    |
+|-----------|----------|--------------------------------|
+| user-id   | Yes      | The ID of the requesting user  |
+
+#### Success Response
+```json
+{
+  "id": 1,
+  "title": "Grocery Shopping",
+  "description": "Weekly groceries",
+  "amount": 1500.5,
+  "paymentMethod": "UPI",
+  "transactionDate": "2024-06-15",
+  "categoryId": 2,
+  "userId": 1
+}
+```
+
+Status: 200 OK
