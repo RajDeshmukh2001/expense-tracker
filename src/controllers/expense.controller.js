@@ -28,3 +28,14 @@ export const updateExpense = async (req, res, next) => {
         next(error);
     }
 }
+
+export const deleteExpense = async (req, res, next) => {
+    try {
+        const expenseId = req.params.id;
+        const userId = req.header("user-id");
+        await service.deleteExpense(expenseId, userId);
+        res.status(200).json({ message: "Expense deleted successfully" });
+    } catch (error) {
+        next(error);
+    }
+}
