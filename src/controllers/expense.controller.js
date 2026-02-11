@@ -11,7 +11,9 @@ export const createExpense = async (req, res, next) => {
 
 export const getExpenseById = async (req, res, next) => {
     try {
-        const expense = await service.getExpenseById(req.params.id);
+        const expenseId = req.params.id;
+        const userId = req.header("user-id");
+        const expense = await service.getExpenseById(expenseId, userId);
         res.status(201).json(expense);
     } catch (error) {
         next(error);
