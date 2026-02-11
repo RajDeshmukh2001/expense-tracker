@@ -40,14 +40,72 @@ cd expense-tracker
 npm install
 ```
 
-### 3. Environment variables
-Create a .env file in the root directory:
+### 3. Environment configuration
+Create a .env file at the project root:
 ```env
 PORT=3000
+DB_HOST=localhost
+DB_USER=root
+DB_PASSWORD=your_password
+DB_NAME=expense_tracker
+DB_PORT=3306
 ```
 
-### 4. Start the server
-```bash
-node server.js
+### 4. Create database
+Create the database manually using MySQL Workbench or any MySQL client:
+```sql
+CREATE DATABASE expense_tracker;
 ```
-Server will run on: `http://localhost:3000`
+
+### 5. Run database migrations
+Return to the project root and run:
+```bash
+npx drizzle-kit generate
+```
+- Reads the schema defined in src/models/schema.js
+- Generates migration files based on the schema for creating or updating tables
+- Stores these files in the migrations folder
+
+```bash
+npx drizzle-kit push
+```
+- Applies the generated migrations to the database
+- Creates or updates tables in MySQL based on the schema
+- Brings the database in sync with the application schema
+
+### 6. Seed initial data
+```bash
+npm run seed
+```
+This will:
+- Insert a default user
+- Insert predefined categories
+
+### 7. Start the server
+```bash
+npx nodemon server.js
+```
+Expected output:
+```bash
+Server running on port: 3000
+Database connected successfully
+```
+
+---
+
+### How to Verify Locally
+**Verify database connection**
+- Server logs should confirm DB connection on startup
+- If DB is unreachable, the server will not start
+
+**Verify seeded data**
+Run the following query manually using MySQL Workbench or any MySQL client:
+```sql
+SELECT * FROM users;
+```
+```sql
+SELECT * FROM categories;
+```
+You should see:
+- One default user
+- Multiple predefined categories**
