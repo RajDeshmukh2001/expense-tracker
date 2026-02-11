@@ -160,6 +160,11 @@ Status: 201
 GET /api/expenses/:id
 ```
 
+#### Headers
+| Key       | Required | Description                    |
+|-----------|----------|--------------------------------|
+| user-id   | Yes      | The ID of the requesting user  |
+
 #### Success Response
 ```json
 {
