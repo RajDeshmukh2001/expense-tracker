@@ -13,3 +13,7 @@ export const findById = async (id, userId) => {
 export const update = async (id, userId, data) => {
     return await db.update(expenses).set(data).where(and(eq(expenses.id, id), eq(expenses.userId, userId)));
 }
+
+export const deleteById = async (id, userId) => {
+    return await db.delete(expenses).where(and(eq(expenses.id, id), eq(expenses.userId, userId)));
+}

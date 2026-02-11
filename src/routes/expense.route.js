@@ -8,5 +8,6 @@ const router = Router();
 router.post("/", validate(createExpenseSchema), controller.createExpense);
 router.get("/:id", controller.getExpenseById);
 router.patch("/:id", validate(updateExpenseSchema), controller.updateExpense);
+router.delete("/:id", controller.deleteExpense);
 
 export default router;
