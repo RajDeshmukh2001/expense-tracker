@@ -19,3 +19,12 @@ export const getExpenseById = async (req, res, next) => {
         next(error);
     }
 }
+
+export const updateExpense = async (req, res, next) => {
+    try {
+        await service.updateExpense(req.params.id, req.body);
+        res.status(200).json({ message: "Expense updated successfully" });
+    } catch (error) {
+        next(error);
+    }
+}

@@ -29,6 +29,9 @@ The system supports recording expenses, viewing and filtering them, updating and
 **3. Get Expense by ID**
 - Retrieves the details of a specific expense using its unique identifier.
 
+**4. Update Expense By ID**
+- It allows partial updates to an existing expense
+
 ---
 
 ## Getting Started
@@ -176,6 +179,29 @@ GET /api/expenses/:id
   "transactionDate": "2024-06-15",
   "categoryId": 2,
   "userId": 1
+}
+```
+
+Status: 200 OK
+
+**4. Update Expense By ID API**
+#### Endpoint
+```
+PATCH /api/expenses/:id
+```
+
+#### Request Body
+```json
+{
+  "amount": 2000,
+  "category": "FOOD"
+}
+```
+
+#### Success Response
+```json
+{
+  "message": "Expense updated successfully"
 }
 ```
 
